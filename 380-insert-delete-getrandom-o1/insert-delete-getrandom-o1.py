@@ -1,10 +1,11 @@
-from random import randrange
+import random
 
 class RandomizedSet(object):
 
     def __init__(self):
         self.nums = []
         self.pos = {}
+        self.getRandom = lambda: random.choice(self.nums)
 
     def insert(self, val):
         if val in self.pos:
@@ -27,7 +28,3 @@ class RandomizedSet(object):
             pos[last_val] = idx
 
         return True
-
-    def getRandom(self):
-        nums = self.nums
-        return nums[randrange(len(nums))]
