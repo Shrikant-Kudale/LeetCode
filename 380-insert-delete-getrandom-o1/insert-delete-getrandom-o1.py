@@ -1,4 +1,4 @@
-import random
+from random import randrange
 
 class RandomizedSet(object):
 
@@ -7,10 +7,6 @@ class RandomizedSet(object):
         self.pos = {}
 
     def insert(self, val):
-        """
-        :type val: int
-        :rtype: bool
-        """
         if val in self.pos:
             return False
         self.pos[val] = len(self.nums)
@@ -18,25 +14,20 @@ class RandomizedSet(object):
         return True
 
     def remove(self, val):
-        """
-        :type val: int
-        :rtype: bool
-        """
-        if val not in self.pos:
+        pos = self.pos
+        if val not in pos:
             return False
 
-        idx = self.pos[val]
-        last_val = self.nums[-1]
+        nums = self.nums
+        idx = pos.pop(val)
+        last_val = nums.pop()
 
-        self.nums[idx] = last_val
-        self.pos[last_val] = idx
+        if idx < len(nums):
+            nums[idx] = last_val
+            pos[last_val] = idx
 
-        self.nums.pop()
-        del self.pos[val]
         return True
 
     def getRandom(self):
-        """
-        :rtype: int
-        """
-        return random.choice(self.nums)
+        nums = self.nums
+        return nums[randrange(len(nums))]
